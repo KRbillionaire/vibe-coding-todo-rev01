@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>프로젝트 간트 차트 (엑셀 스타일)</title>
+  <link rel="stylesheet" href="gantt.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <div class="top-left">
+        <h1>프로젝트 간트 차트 made by 김한솔</h1>
+        <div class="meta-row">
+          <label>
+            프로젝트명
+            <input id="project-name" type="text" placeholder="예) A제품 런칭" />
+          </label>
+          <label>
+            시작일
+            <input id="project-start" type="date" />
+          </label>
+          <label>
+            담당부서
+            <input id="project-dept" type="text" placeholder="예) 전사" />
+          </label>
+        </div>
+      </div>
+      <div class="top-right">
+        <button class="chip-btn">필터</button>
+        <button class="chip-btn">보기 설정</button>
+      </div>
+    </header>
+
+    <section class="controls">
+      <div class="left">
+        <label>부서
+          <select id="dept-filter">
+            <option value="">전체</option>
+          </select>
+        </label>
+        <label>담당자
+          <select id="owner-filter">
+            <option value="">전체</option>
+          </select>
+        </label>
+      </div>
+      <div class="center">
+        <button id="view-day" class="toggle-btn active">일별 보기</button>
+        <button id="view-week" class="toggle-btn">주별 보기</button>
+      </div>
+      <div class="right"></div>
+    </section>
+
+    <main class="main-layout">
+      <!-- 좌측: 데이터 테이블 -->
+      <section class="table-panel" id="table-panel">
+        <div class="table-panel-header">
+          <span class="table-panel-title">입력란</span>
+          <button id="collapse-table-panel" class="gantt-control-btn" title="입력란 접기">◀</button>
+        </div>
+        <div class="table-scroll-wrapper">
+          <div class="table-header">
+            <div class="col-name"></div>
+            <div class="col-start">시작일</div>
+            <div class="col-end">종료일</div>
+            <div class="col-actual-end">실제종료일</div>
+            <div class="col-dept">부서</div>
+            <div class="col-owner">담당자</div>
+          </div>
+          <div id="table-body" class="table-body"></div>
+        </div>
+        <div class="table-scrollbar-wrapper">
+          <div id="table-scrollbar" class="table-scrollbar">
+            <div id="table-scrollbar-thumb" class="table-scrollbar-thumb"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 우측: 간트 차트 -->
+      <section class="gantt-panel">
+        <div class="gantt-header">
+          <div class="gantt-title">간트 차트</div>
+          <div class="legend">
+            <span class="legend-item"><span class="legend-box base"></span> 기본 일정</span>
+            <span class="legend-item"><span class="legend-box progress"></span> 진행률</span>
+            <span class="legend-item"><span class="legend-box group"></span> 그룹</span>
+            <span class="legend-item"><span class="legend-actual-end on-time"></span> 실제종료(정상)</span>
+            <span class="legend-item"><span class="legend-actual-end late"></span> 실제종료(지연)</span>
+          </div>
+        </div>
+        <div class="gantt-grid">
+          <div class="gantt-split">
+            <div class="gantt-left gantt-col-b">
+              <div class="gantt-left-header">
+                <button id="expand-table-panel" class="gantt-control-btn" title="입력란 펼치기" style="display:none;">▶</button>
+              </div>
+              <div id="gantt-names" class="gantt-names"></div>
+            </div>
+
+            <div class="splitter" data-split="bc" title="드래그해서 폭 조절"></div>
+
+            <div class="gantt-right">
+              <div class="gantt-scroll-wrapper">
+                <div id="date-header" class="date-header"></div>
+                <div id="gantt-body" class="gantt-body"></div>
+                <div id="today-line" class="today-line"></div>
+              </div>
+            </div>
+          </div>
+          <div class="gantt-scrollbar-wrapper">
+            <div id="gantt-scrollbar" class="gantt-scrollbar">
+              <div id="gantt-scrollbar-thumb" class="gantt-scrollbar-thumb"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
